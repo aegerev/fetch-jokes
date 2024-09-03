@@ -30,12 +30,32 @@ function App() {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        // TODO: Fetch jokes here...
-    }, []);
+      async function fetchJokes() {
+        setLoading(true);
+        const response = await fetch("https://v2.jokeapi.dev/joke/Any?blacklistFlags=nsfw,religious,political,racist,sexist,explicit&type=single&amount=5"
+        );
+        const data = await response.json();
 
+          if (!data.error) {
+            const jokesArray = data.jokes;
+            const filteredJokesArray = jokesArray.map((jokeObject) => ({
+              id: jokeObject.id,
+              text: jokeObject.joke,
+            }));
+            setJokes(filteredJokesArray);
+          } else {
+              alert("Error: " + data.error);
+          }
+
+          setLoading(false);
+          }
+
+          fetchJokes();
+          }, []);
+     
     return (
         <div className="appWrapper">
-            <h1>My Jokes</h1>
+            <h1>Computer Programming Jokes</h1>
             {loading && <p style={{ marginTop: "2rem" }}>Loading...</p>}
             {!loading && <JokesList jokes={jokes} />}
         </div>
