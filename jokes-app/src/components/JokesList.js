@@ -9,7 +9,7 @@ function JokesList(props) {
     ));
 
  return (
-    <ul className="jokesListWrapper">{jokes}</ul>;
+    <ul className="jokesListWrapper">{jokes}</ul>
  );
 }
 
