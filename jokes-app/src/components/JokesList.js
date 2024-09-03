@@ -1,6 +1,5 @@
 import React from "react";
 import JokesItem from "./JokesItem";
-
 import "../App.css";
 
 
